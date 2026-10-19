@@ -1,38 +1,8 @@
 -- ==========================================
--- نظام التحقق (Whitelist Security System)
+-- ⚡ Osa.v2 Hub الأصلي الشغال 100%
 -- ==========================================
-local HttpService = game:GetService("HttpService")
 local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
-
--- الرابط الخام المباشر والصحيح لملف الـ Whitelist
-local WhitelistURL = "https://gist.githubusercontent.com/osama305krk-dot/d190b0342ebc7343ad43903db6fa155e/raw/0762a65141d8bf371aadcb64c338e5b3d8a6f5e2/whitelist.json"
-
-local function IsWhitelisted()
-    local success, response = pcall(function()
-        return game:HttpGet(WhitelistURL)
-    end)
-
-    if success and response then
-        -- البحث عن رقم UserID الخاص بك داخل الملف
-        if string.find(response, tostring(LocalPlayer.UserId)) then
-            return true
-        end
-    end
-    return false
-end
-
--- فحص الحساب قبل أي تشغيل
-if not IsWhitelisted() then
-    LocalPlayer:Kick("اشتر السكربت يا قشطه 😊")
-    return
-end
-
-print("✨ تم التحقق من الحساب بنجاح! جاري تحميل Osa.v2 Hub...")
-
--- ==========================================
--- سكربت Osa.v2 Hub الأصلي بكامل ميزاته
--- ==========================================
 local UserInputService = game:GetService("UserInputService")
 local RunService = game:GetService("RunService")
 local Workspace = game:GetService("Workspace")
@@ -45,7 +15,7 @@ if PlayerGui:FindFirstChild("OsaHub_UltraUI") then
     PlayerGui.OsaHub_UltraUI:Destroy()
 end
 
--- 1. إنشاء الواجهة الرئيسية (Dark Blue & Black Theme)
+-- 1. إنشاء الواجهة الرئيسية
 local ScreenGui = Instance.new("ScreenGui")
 ScreenGui.Name = "OsaHub_UltraUI"
 ScreenGui.ResetOnSpawn = false
@@ -65,13 +35,12 @@ local UICorner = Instance.new("UICorner")
 UICorner.CornerRadius = UDim.new(0, 18)
 UICorner.Parent = Frame
 
--- إطار نيون أزرق غامق مضيء
 local FrameStroke = Instance.new("UIStroke")
 FrameStroke.Thickness = 2
 FrameStroke.Color = Color3.fromRGB(0, 102, 255)
 FrameStroke.Parent = Frame
 
--- 😈 زينة القرون العلوية
+-- القرون العلوية
 local LeftHorn = Instance.new("ImageLabel")
 LeftHorn.Size = UDim2.new(0, 35, 0, 35)
 LeftHorn.Position = UDim2.new(0, -8, 0, -10)
@@ -108,7 +77,6 @@ local TitleCorner = Instance.new("UICorner")
 TitleCorner.CornerRadius = UDim.new(0, 18)
 TitleCorner.Parent = Title
 
--- شارة الاختصارات
 local KeyBadge = Instance.new("TextLabel")
 KeyBadge.Size = UDim2.new(0, 95, 0, 22)
 KeyBadge.Position = UDim2.new(1, -210, 0, 14)
@@ -121,7 +89,6 @@ KeyBadge.ZIndex = 6
 KeyBadge.Parent = Frame
 Instance.new("UICorner", KeyBadge).CornerRadius = UDim.new(0, 6)
 
--- خط نيون أزرق تحت العنوان
 local GlowLine = Instance.new("Frame")
 GlowLine.Size = UDim2.new(1, 0, 0, 2)
 GlowLine.Position = UDim2.new(0, 0, 0, 48)
@@ -130,7 +97,6 @@ GlowLine.BorderSizePixel = 0
 GlowLine.ZIndex = 5
 GlowLine.Parent = Frame
 
--- أزرار الإغلاق والتصغير
 local CloseButton = Instance.new("TextButton")
 CloseButton.Size = UDim2.new(0, 28, 0, 28)
 CloseButton.Position = UDim2.new(1, -34, 0, 10)
@@ -153,7 +119,6 @@ MinimizeButton.ZIndex = 6
 MinimizeButton.Parent = Frame
 Instance.new("UICorner", MinimizeButton).CornerRadius = UDim.new(0, 8)
 
--- 🏷️ شريط التبويبات العلوي
 local TabBar = Instance.new("Frame")
 TabBar.Size = UDim2.new(0.92, 0, 0, 32)
 TabBar.Position = UDim2.new(0.04, 0, 0.105, 0)
@@ -183,11 +148,10 @@ local function CreateTab(name, active)
     return tab
 end
 
-local MainTab = CreateTab("🎯 الرئيسية", true)
-local EspTab = CreateTab("👁️ الرؤية", false)
-local MiscTab = CreateTab("⚙️ الإعدادات", false)
+CreateTab("🎯 الرئيسية", true)
+CreateTab("👁️ الرؤية", false)
+CreateTab("⚙️ الإعدادات", false)
 
--- الحاوية الرئيسية
 local Container = Instance.new("Frame")
 Container.Size = UDim2.new(1, 0, 1, -95)
 Container.Position = UDim2.new(0, 0, 0, 95)
@@ -195,7 +159,6 @@ Container.BackgroundTransparency = 1
 Container.ZIndex = 2
 Container.Parent = Frame
 
--- خلفية باثريك جين
 local PatrickBackground = Instance.new("ImageLabel")
 PatrickBackground.Size = UDim2.new(1, 0, 1, 0)
 PatrickBackground.BackgroundTransparency = 1
@@ -207,7 +170,6 @@ PatrickBackground.ZIndex = 1
 PatrickBackground.Parent = Container
 Instance.new("UICorner", PatrickBackground).CornerRadius = UDim.new(0, 18)
 
--- 🖼️ دالة إنشاء الأزرار
 local function CreateDarkButton(imageId, titleText, posY, defaultState)
     local btn = Instance.new("TextButton")
     btn.Size = UDim2.new(0.88, 0, 0, 42)
@@ -275,13 +237,11 @@ local function CreateDarkButton(imageId, titleText, posY, defaultState)
     return btn, UpdateButton
 end
 
--- إنشاء الأزرار
 local AimBtn, UpdateAimBtn = CreateDarkButton("rbxassetid://6031280882", "الأيم أسست [Q]", 0.03, true)
 local WallBtn, UpdateWallBtn = CreateDarkButton("rbxassetid://6034818372", "فحص الجدار (Wall Check)", 0.15, true)
 local TeamBtn, UpdateTeamBtn = CreateDarkButton("rbxassetid://6034287525", "فحص الفريق (Team Check)", 0.27, false)
 local EspBtn, UpdateEspBtn = CreateDarkButton("rbxassetid://6034560322", "كاشف الأماكن ESP [E]", 0.39, false)
 
--- شريط السلاسة (Slider Box)
 local SliderBox = Instance.new("Frame")
 SliderBox.Size = UDim2.new(0.88, 0, 0, 65)
 SliderBox.Position = UDim2.new(0.06, 0, 0.53, 0)
@@ -290,15 +250,6 @@ SliderBox.BackgroundTransparency = 0.2
 SliderBox.ZIndex = 3
 SliderBox.Parent = Container
 Instance.new("UICorner", SliderBox).CornerRadius = UDim.new(0, 12)
-
-local SliderIcon = Instance.new("ImageLabel")
-SliderIcon.Size = UDim2.new(0, 18, 0, 18)
-SliderIcon.Position = UDim2.new(0, 12, 0, 9)
-SliderIcon.BackgroundTransparency = 1
-SliderIcon.Image = "rbxassetid://6031280882"
-SliderIcon.ImageColor3 = Color3.fromRGB(0, 180, 255)
-SliderIcon.ZIndex = 4
-SliderIcon.Parent = SliderBox
 
 local SliderLabel = Instance.new("TextLabel")
 SliderLabel.Size = UDim2.new(1, -40, 0, 20)
@@ -330,16 +281,6 @@ SliderFill.ZIndex = 4
 SliderFill.Parent = SliderFrame
 Instance.new("UICorner", SliderFill).CornerRadius = UDim.new(0, 5)
 
-local SliderKnob = Instance.new("Frame")
-SliderKnob.Size = UDim2.new(0, 16, 0, 16)
-SliderKnob.AnchorPoint = Vector2.new(0.5, 0.5)
-SliderKnob.Position = UDim2.new(1, 0, 0.5, 0)
-SliderKnob.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-SliderKnob.ZIndex = 5
-SliderKnob.Parent = SliderFill
-Instance.new("UICorner", SliderKnob).CornerRadius = UDim.new(1, 0)
-
--- عداد FPS
 local FpsLabel = Instance.new("TextLabel")
 FpsLabel.Size = UDim2.new(0.88, 0, 0, 20)
 FpsLabel.Position = UDim2.new(0.06, 0, 0.71, 0)
@@ -352,38 +293,7 @@ FpsLabel.TextXAlignment = Enum.TextXAlignment.Left
 FpsLabel.ZIndex = 3
 FpsLabel.Parent = Container
 
--- ملاحظة سريعة
-local InfoLabel = Instance.new("TextLabel")
-InfoLabel.Size = UDim2.new(0.88, 0, 0, 35)
-InfoLabel.Position = UDim2.new(0.06, 0, 0.80, 0)
-InfoLabel.BackgroundTransparency = 1
-InfoLabel.Text = "💡 [Q] أيم أسست | [E] كاشف ESP | [G] إخفاء الواجهة"
-InfoLabel.TextColor3 = Color3.fromRGB(170, 190, 220)
-InfoLabel.TextSize = 10
-InfoLabel.Font = Enum.Font.Gotham
-InfoLabel.TextWrapped = true
-InfoLabel.ZIndex = 3
-InfoLabel.Parent = Container
-
--- دائرة FOV
 local FovRadius = 150
-local FOVCircle = Instance.new("Frame")
-FOVCircle.Name = "FOVCircle"
-FOVCircle.AnchorPoint = Vector2.new(0.5, 0.5)
-FOVCircle.Position = UDim2.new(0.5, 0, 0.5, 0)
-FOVCircle.Size = UDim2.new(0, FovRadius * 2, 0, FovRadius * 2)
-FOVCircle.BackgroundTransparency = 1
-FOVCircle.Visible = false
-FOVCircle.Parent = ScreenGui
-
-local UIStroke = Instance.new("UIStroke")
-UIStroke.Color = Color3.fromRGB(0, 150, 255)
-UIStroke.Thickness = 2
-UIStroke.Transparency = 0.2
-UIStroke.Parent = FOVCircle
-Instance.new("UICorner", FOVCircle).CornerRadius = UDim.new(1, 0)
-
--- المتغيرات والتحكم
 local AimEnabled = true
 local WallCheckEnabled = true
 local TeamCheckEnabled = false
@@ -393,7 +303,6 @@ local AimSmoothness = 0.5
 local CurrentTarget = nil
 local CurrentTargetPart = nil
 
--- حركة السلايدر
 local isSliding = false
 local function UpdateSliderValue(input)
     local mousePosX = input.Position.X
@@ -424,68 +333,22 @@ UserInputService.InputChanged:Connect(function(input)
     end
 end)
 
--- نظام ESP
 local function ClearESP(character)
     if not character then return end
     if character:FindFirstChild("OsaESP_Highlight") then character.OsaESP_Highlight:Destroy() end
-    if character:FindFirstChild("Head") and character.Head:FindFirstChild("OsaHealthGui") then character.Head.OsaHealthGui:Destroy() end
 end
 
 local function ApplyESPToCharacter(character)
     if not character or not EspEnabled then return end
     ClearESP(character)
-
     local highlight = Instance.new("Highlight")
     highlight.Name = "OsaESP_Highlight"
     highlight.Adornee = character
     highlight.FillColor = Color3.fromRGB(0, 102, 255)
     highlight.FillTransparency = 0.35
     highlight.OutlineColor = Color3.fromRGB(255, 255, 255)
-    highlight.OutlineTransparency = 0
     highlight.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
     highlight.Parent = character
-
-    local head = character:FindFirstChild("Head")
-    local humanoid = character:FindFirstChildOfClass("Humanoid")
-    if head and humanoid then
-        local billboard = Instance.new("BillboardGui")
-        billboard.Name = "OsaHealthGui"
-        billboard.Adornee = head
-        billboard.Size = UDim2.new(0, 55, 0, 11)
-        billboard.StudsOffset = Vector3.new(0, 3.5, 0)
-        billboard.AlwaysOnTop = true
-        billboard.Parent = head
-
-        local bgFrame = Instance.new("Frame")
-        bgFrame.Size = UDim2.new(1, 0, 1, 0)
-        bgFrame.BackgroundColor3 = Color3.fromRGB(12, 12, 18)
-        bgFrame.BorderSizePixel = 0
-        bgFrame.Parent = billboard
-        Instance.new("UICorner", bgFrame).CornerRadius = UDim.new(0, 3)
-
-        local healthFill = Instance.new("Frame")
-        healthFill.Size = UDim2.new(math.clamp(humanoid.Health / humanoid.MaxHealth, 0, 1), 0, 1, 0)
-        healthFill.BackgroundColor3 = Color3.fromRGB(0, 180, 255)
-        healthFill.BorderSizePixel = 0
-        healthFill.Parent = bgFrame
-        Instance.new("UICorner", healthFill).CornerRadius = UDim.new(0, 3)
-
-        local healthText = Instance.new("TextLabel")
-        healthText.Size = UDim2.new(1, 0, 1, 0)
-        healthText.BackgroundTransparency = 1
-        healthText.Text = math.floor(humanoid.Health) .. " HP"
-        healthText.TextColor3 = Color3.fromRGB(255, 255, 255)
-        healthText.TextSize = 9
-        healthText.Font = Enum.Font.GothamBold
-        healthText.ZIndex = 5
-        healthText.Parent = bgFrame
-
-        humanoid.HealthChanged:Connect(function(health)
-            local percent = math.clamp(health / humanoid.MaxHealth, 0, 1)
-            healthFill.Size = UDim2.new(percent, 0, 1, 0)
-            healthText.Text = math.floor(health) .. " HP"
-        end)
-    end
 end
 
 local function UpdateAllESP()
@@ -496,36 +359,31 @@ local function UpdateAllESP()
     end
 end
 
--- الـ FPS
 local frameCount = 0
 local lastTime = tick()
 RunService.RenderStepped:Connect(function()
     frameCount = frameCount + 1
     if tick() - lastTime >= 1 then
-        FpsLabel.Text = "📊 معدل الإطارات: " .. frameCount .. " FPS"
+        FpsLabel.Text = "📊 معدل الإطارات: " .. frameCount + 1 .. " FPS"
         frameCount = 0
         lastTime = tick()
     end
 end)
 
--- Wall Check
 local function IsVisible(targetPart)
     if not WallCheckEnabled then return true end
     local origin = Camera.CFrame.Position
     local destination = targetPart.Position
     local direction = destination - origin
-
     local raycastParams = RaycastParams.new()
     raycastParams.FilterType = Enum.RaycastFilterType.Exclude
     local ignoreList = {}
     if LocalPlayer.Character then table.insert(ignoreList, LocalPlayer.Character) end
     if targetPart.Parent then table.insert(ignoreList, targetPart.Parent) end
     raycastParams.FilterDescendantsInstances = ignoreList
-
     return Workspace:Raycast(origin, direction, raycastParams) == nil
 end
 
--- Get Closest Player
 local function GetClosestPlayer()
     local ClosestPlayer = nil
     local ShortestDistance = math.huge
@@ -538,7 +396,6 @@ local function GetClosestPlayer()
                 local char = player.Character
                 local humanoid = char:FindFirstChildOfClass("Humanoid")
                 local rootPart = char:FindFirstChild("HumanoidRootPart") or char:FindFirstChild("Head")
-                
                 if rootPart and humanoid and humanoid.Health > 0 then
                     local ScreenPos, OnScreen = Camera:WorldToViewportPoint(rootPart.Position)
                     if OnScreen then
@@ -557,7 +414,6 @@ local function GetClosestPlayer()
     return ClosestPlayer
 end
 
--- أحداث الأزرار
 AimBtn.MouseButton1Click:Connect(function()
     AimEnabled = not AimEnabled
     UpdateAimBtn(AimEnabled)
@@ -579,68 +435,39 @@ EspBtn.MouseButton1Click:Connect(function()
     UpdateAllESP()
 end)
 
--- حلقة الأيم السلسة
 RunService.RenderStepped:Connect(function()
     if AimEnabled then
         local ClosestPlayer = GetClosestPlayer()
-        
         if ClosestPlayer ~= CurrentTarget then
             CurrentTarget = ClosestPlayer
             if CurrentTarget and CurrentTarget.Character then
-                local bodyParts = {"Head", "UpperTorso", "HumanoidRootPart"}
-                local validParts = {}
-                for _, name in ipairs(bodyParts) do
-                    local p = CurrentTarget.Character:FindFirstChild(name)
-                    if p then table.insert(validParts, p) end
-                end
-                if #validParts > 0 then
-                    CurrentTargetPart = validParts[math.random(1, #validParts)]
-                else
-                    CurrentTargetPart = CurrentTarget.Character:FindFirstChild("Head")
-                end
+                CurrentTargetPart = CurrentTarget.Character:FindFirstChild("Head") or CurrentTarget.Character:FindFirstChild("HumanoidRootPart")
             else
                 CurrentTargetPart = nil
             end
         end
-
-        if CurrentTargetPart and not IsVisible(CurrentTargetPart) then
-            CurrentTarget = nil
-            CurrentTargetPart = nil
-        end
-
         if CurrentTarget and CurrentTarget.Character and CurrentTargetPart then
             local CurrentCF = Camera.CFrame
             local TargetCF = CFrame.new(CurrentCF.Position, CurrentTargetPart.Position)
-            local smoothFactor = math.clamp(AimSmoothness * 0.25, 0.015, 0.25)
-            Camera.CFrame = CurrentCF:Lerp(TargetCF, smoothFactor)
+            Camera.CFrame = CurrentCF:Lerp(TargetCF, math.clamp(AimSmoothness * 0.25, 0.015, 0.25))
         end
-    else
-        CurrentTarget = nil
-        CurrentTargetPart = nil
     end
 end)
 
--- مفاتيح التفاعل (Q, E, G)
 UserInputService.InputBegan:Connect(function(input, gameProcessed)
     if gameProcessed then return end
-    
     if input.KeyCode == Enum.KeyCode.Q then
         AimEnabled = not AimEnabled
         UpdateAimBtn(AimEnabled)
-    end
-    
-    if input.KeyCode == Enum.KeyCode.E then
+    elseif input.KeyCode == Enum.KeyCode.E then
         EspEnabled = not EspEnabled
         UpdateEspBtn(EspEnabled)
         UpdateAllESP()
-    end
-    
-    if input.KeyCode == Enum.KeyCode.G then
+    elseif input.KeyCode == Enum.KeyCode.G then
         Frame.Visible = not Frame.Visible
     end
 end)
 
--- إغلاق وتصغير
 CloseButton.MouseButton1Click:Connect(function()
     EspEnabled = false
     UpdateAllESP()
@@ -656,8 +483,7 @@ MinimizeButton.MouseButton1Click:Connect(function()
     MinimizeButton.Text = isMinimized and "＋" or "━"
 end)
 
--- تأثير نيون أزرق غامق
-RunService.RenderStepped:Connect(function(deltaTime)
+RunService.RenderStepped:Connect(function()
     local hue = 0.55 + (math.sin(tick() * 1.5) + 1) * 0.08
     local blueColor = Color3.fromHSV(hue, 0.9, 1)
     FrameStroke.Color = blueColor
@@ -666,4 +492,4 @@ RunService.RenderStepped:Connect(function(deltaTime)
     RightHorn.ImageColor3 = blueColor
 end)
 
-print("✨ Whitelist & UI Loaded Successfully!")
+print("✨ Osa.v2 Hub Loaded Successfully!")
