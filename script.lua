@@ -1,11 +1,12 @@
 -- ==========================================
 -- نظام التحقق (Whitelist Security System)
 -- ==========================================
+local HttpService = game:GetService("HttpService")
 local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
 
--- رابط مباشر ودائم لملف الـ Whitelist الخاص بك
-local WhitelistURL = "https://gist.githubusercontent.com/osama305krk-dot/d190b0342ebc7343ad43903db6fa155e/raw/whitelist.json"
+-- الرابط الخام المباشر والصحيح لملف الـ Whitelist
+local WhitelistURL = "https://gist.githubusercontent.com/osama305krk-dot/d190b0342ebc7343ad43903db6fa155e/raw/0762a65141d8bf371aadcb64c338e5b3d8a6f5e2/whitelist.json"
 
 local function IsWhitelisted()
     local success, response = pcall(function()
@@ -13,7 +14,7 @@ local function IsWhitelisted()
     end)
 
     if success and response then
-        -- البحث المباشر عن رقم الآيدي داخل النص
+        -- البحث عن رقم UserID الخاص بك داخل الملف
         if string.find(response, tostring(LocalPlayer.UserId)) then
             return true
         end
