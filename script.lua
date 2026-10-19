@@ -1,29 +1,21 @@
 -- ==========================================
 -- نظام التحقق (Whitelist Security System)
 -- ==========================================
-local HttpService = game:GetService("HttpService")
 local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
 
--- رابط الـ Whitelist الخاص بك
-local WhitelistURL = "https://gist.githubusercontent.com/osama305krk-dot/d190b0342ebc7343ad43903db6fa155e/raw/0762a65141d8bf371aadcb64c338e5b3d8a6f5e2/whitelist.json"
+-- رابط مباشر ودائم لملف الـ Whitelist الخاص بك
+local WhitelistURL = "https://gist.githubusercontent.com/osama305krk-dot/d190b0342ebc7343ad43903db6fa155e/raw/whitelist.json"
 
 local function IsWhitelisted()
     local success, response = pcall(function()
         return game:HttpGet(WhitelistURL)
     end)
 
-    if success then
-        local successDecode, WhitelistedIDs = pcall(function()
-            return HttpService:JSONDecode(response)
-        end)
-        
-        if successDecode and type(WhitelistedIDs) == "table" then
-            for _, id in ipairs(WhitelistedIDs) do
-                if tonumber(id) == LocalPlayer.UserId then
-                    return true
-                end
-            end
+    if success and response then
+        -- البحث المباشر عن رقم الآيدي داخل النص
+        if string.find(response, tostring(LocalPlayer.UserId)) then
+            return true
         end
     end
     return false
@@ -31,7 +23,7 @@ end
 
 -- فحص الحساب قبل أي تشغيل
 if not IsWhitelisted() then
-    LocalPlayer:Kick("عذراً، حسابك غير مفعل لاستخدام Osa.v2 Hub!")
+    LocalPlayer:Kick("اشتر السكربت يا قشطه 😊")
     return
 end
 
