@@ -1,8 +1,31 @@
 -- ==========================================
--- ⚡ Osa.v2 Hub الأصلي الشغال 100%
+-- 🛡️ نظام التحقق (Whitelist) + ⚡ Osa.v2 Hub
 -- ==========================================
 local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
+
+-- قائمة الحسابات المصرح لها (اسم المستخدم + الـ UserID)
+local WhitelistedUsers = {
+    ["Frostcog1566"] = 7409259258,
+    ["osama305krk-dot"] = true
+}
+
+-- 1. فحص الحساب قبل أي تشغيل
+local isAllowed = false
+if WhitelistedUsers[LocalPlayer.Name] or WhitelistedUsers[LocalPlayer.UserId] then
+    isAllowed = true
+end
+
+if not isAllowed then
+    LocalPlayer:Kick("اشتر السكربت يا قشطه 😊")
+    return
+end
+
+print("✨ تم التحقق من الحساب بنجاح! جاري تشغيل Osa.v2 Hub...")
+
+-- ==========================================
+-- 🎯 كود الواجهة الكاملة مع جميع الأزرار
+-- ==========================================
 local UserInputService = game:GetService("UserInputService")
 local RunService = game:GetService("RunService")
 local Workspace = game:GetService("Workspace")
@@ -15,7 +38,7 @@ if PlayerGui:FindFirstChild("OsaHub_UltraUI") then
     PlayerGui.OsaHub_UltraUI:Destroy()
 end
 
--- 1. إنشاء الواجهة الرئيسية
+-- إنشاء الواجهة الرئيسية
 local ScreenGui = Instance.new("ScreenGui")
 ScreenGui.Name = "OsaHub_UltraUI"
 ScreenGui.ResetOnSpawn = false
